@@ -3,8 +3,14 @@ Vagrant box for building, experimenting, and hacking on blockchains. Both comman
 
 # Building:
 1. Install vagrant (https://www.vagrantup.com/downloads.html) and VirtualBox (https://www.virtualbox.org/wiki/Downloads)
-2. `vagrant up cli` - first time takes about 15 minutes depending on hardware
-3. `vagrant ssh` - to login to the vm
+2. Pull submodules: `git submodule update --init --recursive`
+3. `vagrant up cli` - first time takes about 15 minutes depending on hardware
+4. `vagrant ssh` - to login to the vm
+
+# Updating:
+1. `git pull`
+2. `git submodule update --recursive --remote`
+3. `vagrant provision`
 
 Replace cli with gui above for the graphical version.
 
