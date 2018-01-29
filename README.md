@@ -7,12 +7,14 @@ Vagrant box for building, experimenting, and hacking on blockchains. Both comman
 3. `vagrant up cli` - first time takes about 15 minutes depending on hardware
 4. `vagrant ssh` - to login to the vm
 
+*Replace cli with gui above for the graphical version.*
+
 # Updating:
 1. `git pull`
 2. `git submodule update --recursive --remote`
 3. `vagrant provision`
 
-Replace cli with gui above for the graphical version.
+*Replace cli with gui above for the graphical version.*
 
 # Components:
 ### Ethereum CLI Tools
@@ -36,12 +38,12 @@ Replace cli with gui above for the graphical version.
 
 # Ansible Playbooks
 The vagrant image is built using ansible playbooks which can be used on a physical or virtual Ubuntu appliance. Only Ubuntu version 16.04 is supported. The following order MUST be followed when using the playbooks:
-1. core-cli.yml
-2. OPTIONAL: core-gui.yml
-3. OPTIONAL: customization-cli.yml
-4. ethereum-cli.yml
-5. OPTIONAL: ethereum-gui.yml
-6. hlfabric.yml
+1. `core-cli.yml`
+2. `core-gui.yml` *OPTIONAL*
+3. `customization-cli.yml` *OPTIONAL*
+4. `ethereum-cli.yml`
+5. `ethereum-gui.yml` *OPTIONAL*
+6. `hlfabric.yml`
 
 See ansible documentation for more information about playbooks: http://docs.ansible.com/ansible/latest/playbooks.html
 
