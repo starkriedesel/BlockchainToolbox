@@ -1,0 +1,16 @@
+---
+- hosts: all
+  tasks:
+    - name: Install build-essential
+      apt: name=build-essential
+      become: true
+    - name: Install Docker
+      import_tasks: core-tasks/docker.yml
+    - name: Install GoLang
+      import_tasks: core-tasks/golang.yml
+    - name: Install NodeJS
+      import_tasks: core-tasks/nodejs.yml
+    - name: Install Nix
+      import_tasks: core-tasks/nix.yml
+    - name: Install Radare2
+      import_tasks: core-tasks/radare2.yml

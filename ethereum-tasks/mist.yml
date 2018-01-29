@@ -1,0 +1,14 @@
+- name: Check if Mist is installed
+  command: dpkg-query -W 'mist'
+  ignore_errors: True
+  register: mist_installed
+- name: Download Mist deb file
+  get_url:
+    url: https://github.com/ethereum/mist/releases/download/v0.9.3/Mist-linux64-0-9-3.deb
+    dest: /tmp/Mist-linux64.deb
+  when: mist_installed|failed
+- name: Install Mist from deb
+  apt:
+    deb: /tmp/Mist-linux64.deb
+  become: true
+  when: mist_installed|failed

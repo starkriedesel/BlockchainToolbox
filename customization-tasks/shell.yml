@@ -1,0 +1,18 @@
+- name: Install zsh
+  apt:
+    name: zsh
+  become: true
+- name: Install git
+  apt:
+    name: git
+  become: true
+- name: Set zshrc file
+  copy:
+    src: files/zshrc
+    dest: "{{ansible_env.HOME}}/.zshrc"
+    mode: 0644
+- name: Change user shell to zsh
+  user:
+    name: "{{ansible_user}}"
+    shell: /usr/bin/zsh
+

@@ -1,0 +1,3 @@
+[submodule "roles/gantsign.visual-studio-code"]
+	path = roles/gantsign.visual-studio-code
+	url = https://github.com/gantsign/ansible-role-visual-studio-code

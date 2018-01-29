@@ -1,0 +1,6 @@
+---
+- hosts: all
+  tasks:
+    - import_tasks: ethereum-tasks/ganache-gui.yml
+    - import_tasks: ethereum-tasks/ethereumwallet.yml
+    - import_tasks: ethereum-tasks/mist.yml

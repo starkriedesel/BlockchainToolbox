@@ -1,0 +1,5 @@
+---
+- hosts: '*'
+  tasks:
+    - name: Customize shell
+      import_tasks: customization-tasks/shell.yml

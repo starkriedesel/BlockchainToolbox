@@ -1,0 +1,40 @@
+- name: Create tools directory
+  file: name=/home/vagrant/tools state=directory
+- name: Clone radare2 git repo
+  git:
+    repo: https://github.com/radare/radare2
+    dest: /home/vagrant/tools/radare2
+- name: Clone radare2-extras git repo
+  git:
+    repo: https://github.com/radare/radare2-extras
+    dest: /home/vagrant/tools/radare2-extras
+- name: Install radare2 dependencies
+  apt: name={{item}}
+  with_items:
+    - libewf-dev
+    - libyara-dev
+    - libcurl4-openssl-dev
+    - libjansson-dev
+  become: true
+- name: Build radare2
+  shell: sys/install.sh
+  args:
+    chdir: /home/vagrant/tools/radare2
+    creates: /usr/bin/r2
+  environment:
+    R2PM_PLUGDIR: /usr/lib/radare2/last
+    DESTDIR: /usr/lib/radare2/last/
+- name: Initialzie R2PM
+  shell: r2pm init
+  args:
+    creates: /home/vagrant/.config/radare2/r2pm/git/radare2-pm/db
+  environment:
+    R2PM_PLUGDIR: /usr/lib/radare2/last
+    DESTDIR: /usr/lib/radare2/last/
+- name: Install radare2 evm support
+  shell: r2pm install evm
+  args:
+    creates: /home/vagrant/.config/radare2/plugins/asm_evm.so
+  environment:
+    R2PM_PLUGDIR: /usr/lib/radare2/last
+    DESTDIR: /usr/lib/radare2/last/

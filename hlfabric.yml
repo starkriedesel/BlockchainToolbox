@@ -1,0 +1,43 @@
+---
+- hosts: '*'
+  tasks:
+    # Requires: docker, nodejs, golang (installed via core-cli.yml)
+    - name: Check for hlfabric binaries
+      stat:
+        path: "{{ansible_env.HOME}}/hlfabric/bin/peer"
+      register: hlfabric_bin_check
+    - name: Make HL:Fabric directory
+      file:
+        path: "{{ansible_env.HOME}}/hlfabric"
+        state: directory
+        mode: 0755
+    - name: Pull HL:Fabric samples git repo
+      git:
+        repo: https://github.com/hyperledger/fabric-samples.git
+        dest: "{{ansible_env.HOME}}/hlfabric/fabric-samples"
+    - name: Download HL:Fabric install script
+      get_url:
+        url: https://goo.gl/byy2Qj
+        dest: /tmp/hlfabric_install.sh
+        mode: 0755
+      when: hlfabric_bin_check.stat.exists == False
+    - name: Execute HL:Fabric install script
+      shell: /tmp/hlfabric_install.sh
+      args:
+        chdir: "{{ansible_env.HOME}}/hlfabric"
+      when: hlfabric_bin_check.stat.exists == False
+    - name: Symlink HL:Fabric binaries
+      file:
+        path: /usr/local/bin/{{item}}
+        src: "{{ansible_env.HOME}}/hlfabric/bin/{{item}}"
+        state: link
+      with_items:
+        - cryptogen
+        - configtxgen
+        - configtxlator
+        - peer
+      become: true
+    - name: Pull IBM Marbles demo repository
+      git:
+        repo: https://github.com/IBM-Blockchain/marbles
+        dest: "{{ansible_env.HOME}}/hlfabric/marbles"

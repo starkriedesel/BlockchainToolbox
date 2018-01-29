@@ -1,0 +1,20 @@
+- name: Add dapphub nix channel
+  shell: bash -c "source /home/vagrant/.nix-profile/etc/profile.d/nix.sh && nix-channel --add https://nix.dapphub.com/pkgs/dapphub"
+- name: Update nix channels
+  shell: bash -c "source /home/vagrant/.nix-profile/etc/profile.d/nix.sh && nix-channel --add https://nix.dapphub.com/pkgs/dapphub && nix-channel --update"
+- name: Install dapp, seth, and hevm via nix
+  shell: bash -c "source /home/vagrant/.nix-profile/etc/profile.d/nix.sh && nix-channel --add https://nix.dapphub.com/pkgs/dapphub && nix-env -iA dapphub.{{item}}"
+  args:
+    creates: /home/vagrant/.nix-profile/bin/{{item}}
+  with_items:
+    - dapp
+    - seth
+    - hevm
+- name: Clone evmdis git repo
+  git:
+    repo: https://github.com/Arachnid/evmdis
+    dest: /home/vagrant/go/src/github.com/Arachnid/evmdis
+- name: Build evmdis
+  shell: bash -c "go install github.com/Arachnid/evmdis/evmdis"
+  args:
+    creates: /home/vagrant/go/bin/evmdis

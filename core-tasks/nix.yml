@@ -1,0 +1,36 @@
+# Adapted from https://github.com/makkus/install-nix
+- name: Test whether nix binary exists
+  stat:
+    path: /home/vagrant/.nix-profile/bin/nix-env
+  register: nix_env_binary
+- name: Create nix directory
+  file:
+    path: /nix
+    state: directory
+    owner: vagrant
+  become: yes
+  when: 'nix_env_binary.stat.exists == false'
+- name: Install nix dependencies
+  apt: name={{item}}
+  with_items:
+    - curl
+    - bzip2
+    - ca-certificates
+    - libdigest-sha-perl
+  become: yes
+  when: 'nix_env_binary.stat.exists == false'
+- name: Download nix installer
+  get_url:
+    url: https://nixos.org/nix/install
+    dest: /tmp/nix_install.sh
+    mode: 0755
+  when: 'nix_env_binary.stat.exists == false'
+- name: Run nix installer
+  shell: /tmp/nix_install.sh
+  args:
+    creates: /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+  environment:
+    USER: vagrant
+    ALLOW_PREEXISTING_INSTALLATION: "x"
+  when: 'nix_env_binary.stat.exists == false'
+

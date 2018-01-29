@@ -1,0 +1,12 @@
+- name: Clone carsenk/explorer
+  git:
+    repo: https://github.com/carsenk/explorer
+    dest: /home/vagrant/ethereum/explorer
+- name: Install explorer npm depedencies
+  npm:
+    path: /home/vagrant/ethereum/explorer
+    production: no
+- name: Install explorer bower depedencies
+  bower:
+    path: /home/vagrant/ethereum/explorer
+    relative_execpath: node_modules/.bin

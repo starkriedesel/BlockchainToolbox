@@ -1,0 +1,27 @@
+---
+- hosts: all
+  tasks:
+    - name: Install build-essential
+      apt: name=build-essential
+      become: true
+    - name: Make ethereum directory
+      file: path=/home/vagrant/ethereum state=directory
+    - name: Install testrpc
+      npm: name=testrpc global=yes
+      become: true
+    - name: Install ganache-cli
+      npm: name=ganache-cli global=yes
+      become: true
+    - name: Install truffle
+      npm: name=truffle global=yes
+      become: true
+    - name: Install geth (go-ethereum) from source
+      import_tasks: ethereum-tasks/geth.yml
+    - name: Install solidity (solc) from source
+      import_tasks: ethereum-tasks/solc.yml
+    - name: Install porosity from source
+      import_tasks: ethereum-tasks/porosity.yml
+    - name: Install dapphub tools
+      import_tasks: ethereum-tasks/dapphub.yml
+    - name: Install ethereum block explorer
+      import_tasks: ethereum-tasks/explorer.yml

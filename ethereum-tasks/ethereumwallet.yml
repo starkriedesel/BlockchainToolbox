@@ -1,0 +1,14 @@
+- name: Check if Ethereum Wallet is installed
+  command: dpkg-query -W 'ethereumwallet'
+  ignore_errors: True
+  register: ethereumwallet_installed
+- name: Download Ethereum Wallet deb file
+  get_url:
+    url: https://github.com/ethereum/mist/releases/download/v0.9.3/Ethereum-Wallet-linux64-0-9-3.deb
+    dest: /tmp/Ethereum-Wallet-linux64.deb
+  when: ethereumwallet_installed|failed
+- name: Install Ethereum Wallet from deb
+  apt:
+    deb: /tmp/Ethereum-Wallet-linux64.deb
+  become: true
+  when: ethereumwallet_installed|failed

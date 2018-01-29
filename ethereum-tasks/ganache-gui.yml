@@ -1,0 +1,5 @@
+- name: Install Ganache GUI
+  get_url:
+    url: https://github.com/trufflesuite/ganache/releases/download/v1.0.1/ganache-1.0.1-x86_64.AppImage
+    dest: /home/vagrant/ethereum/Ganache.AppImage
+    mode: 0755

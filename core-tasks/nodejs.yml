@@ -1,0 +1,15 @@
+- name: Install curl
+  apt: name=curl
+  become: true
+- name: Install NodeJS PPA
+  command: bash -c "curl -sL https://deb.nodesource.com/setup_8.x | bash -"
+  become: true
+  args:
+    creates: /etc/apt/sources.list.d/nodesource.list
+- name: Install NodeJS
+  apt: name=nodejs update_cache=true
+  become: true
+#- name: Install NPM
+#  apt: name=npm
+#  become: true
+
