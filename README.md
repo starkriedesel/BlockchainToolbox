@@ -14,8 +14,6 @@ Vagrant box for building, experimenting, and hacking on blockchains. Both comman
 2. `git submodule update --recursive --remote`
 3. `vagrant provision`
 
-*Replace cli with gui above for the graphical version.*
-
 # Components:
 ### Ethereum CLI Tools
 * Go-Ethereum (`geth`, `swarm`): https://github.com/ethereum/go-ethereum
