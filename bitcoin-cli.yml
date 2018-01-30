@@ -1,0 +1,51 @@
+---
+- hosts: all
+  tasks:
+    - name: Install build-essential
+      apt: name=build-essential
+      become: true
+    - name: Make bitcoin directory
+      file:
+        path: "{{ansible_env.HOME}}/bitcoin"
+        state: directory
+    - name: Add bitcoin core ppa
+      apt_repository:
+        repo: 'ppa:bitcoin/bitcoin'
+      become: true
+    - name: Install bitcoin core requirements
+      apt: name={{item}}
+      with_items:
+        - autoconf
+        - libdb4.8-dev
+        - libdb4.8++-dev
+        - libevent-dev
+      become: true
+    - name: Pull bitcoin core github repo
+      git:
+        repo: https://github.com/bitcoin/bitcoin.git
+        dest: "{{ansible_env.HOME}}/bitcoin/core"
+    - name: Autoconf bitcoin core
+      command: "{{ansible_env.HOME}}/bitcoin/core/autogen.sh"
+      args:
+        chdir: "{{ansible_env.HOME}}/bitcoin/core"
+        creates: "{{ansible_env.HOME}}/bitcoin/core/configure"
+    - name: Configure bitcoin core
+      command: "{{ansible_env.HOME}}/bitcoin/core/configure"
+      args:
+        chdir: "{{ansible_env.HOME}}/bitcoin/core"
+        creates: "{{ansible_env.HOME}}/bitcoin/core/Makefile"
+    - name: Make bitcoin core
+      make:
+        chdir: "{{ansible_env.HOME}}/bitcoin/core"
+        target: all
+    - name: Install bitcoin core binaries
+      copy:
+        src: "{{ansible_env.HOME}}/bitcoin/core/src/{{item}}"
+        dest: "/usr/local/bin/{{item}}"
+        mode: 755
+      with_items:
+        - bitcoind
+        - bitcoin-cli
+        - bitcoin-tx
+      become: true
+

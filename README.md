@@ -34,6 +34,9 @@ Vagrant box for building, experimenting, and hacking on blockchains. Both comman
 * Fabric Samples: https://github.com/hyperledger/fabric-samples
 * IBM Marbles example: https://github.com/IBM-Blockchain/marbles
 
+### Bitcoin CLI Tools
+* Bitcoin Core (`bitcoind`, `bitcoin-cli`, `bitcoin-tx`): https://github.com/bitcoin/bitcoin
+
 # Ansible Playbooks
 The vagrant image is built using ansible playbooks which can be used on a physical or virtual Ubuntu appliance. Only Ubuntu version 16.04 is supported. The following order MUST be followed when using the playbooks:
 1. `core-cli.yml`
@@ -41,7 +44,8 @@ The vagrant image is built using ansible playbooks which can be used on a physic
 3. `customization-cli.yml` *OPTIONAL*
 4. `ethereum-cli.yml`
 5. `ethereum-gui.yml` *OPTIONAL*
-6. `hlfabric.yml`
+6. `bitcoin-cli.yml`
+7. `hlfabric.yml`
 
 See ansible documentation for more information about playbooks: http://docs.ansible.com/ansible/latest/playbooks.html
 
