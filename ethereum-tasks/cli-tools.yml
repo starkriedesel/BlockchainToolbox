@@ -1,0 +1,11 @@
+- name: Install ethereum tools from npm
+  npm:
+    name: "{{item}}"
+    global: yes
+  become: true
+  with_items:
+    - truffle
+    - testrpc
+    - ganache-cli
+    - solium
+    - embark

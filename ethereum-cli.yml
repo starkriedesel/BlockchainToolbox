@@ -6,15 +6,8 @@
       become: true
     - name: Make ethereum directory
       file: path=/home/vagrant/ethereum state=directory
-    - name: Install testrpc
-      npm: name=testrpc global=yes
-      become: true
-    - name: Install ganache-cli
-      npm: name=ganache-cli global=yes
-      become: true
-    - name: Install truffle
-      npm: name=truffle global=yes
-      become: true
+    - name: Install ethereum cli tools
+      import_tasks: ethereum-tasks/cli-tools.yml
     - name: Install geth (go-ethereum) from source
       import_tasks: ethereum-tasks/geth.yml
     - name: Install solidity (solc) from source
@@ -25,3 +18,5 @@
       import_tasks: ethereum-tasks/dapphub.yml
     - name: Install ethereum block explorer
       import_tasks: ethereum-tasks/explorer.yml
+    - name: Install parity
+      import_tasks: ethereum-tasks/parity.yml

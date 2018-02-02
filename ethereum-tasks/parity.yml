@@ -1,0 +1,8 @@
+- name: Download parity install script
+  get_url:
+    url: https://get.parity.io
+    dest: /tmp/install_parity.sh
+    mode: 0755
+- name: Install parity from installer script
+  command: /tmp/install_parity.sh
+  become: true

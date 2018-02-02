@@ -18,10 +18,13 @@ Vagrant box for building, experimenting, and hacking on blockchains. Both comman
 ### Ethereum CLI Tools
 * Go-Ethereum (`geth`, `swarm`): https://github.com/ethereum/go-ethereum
 * Solidity Compiler (`solc`): https://github.com/ethereum/solidity
+* Parity (`parity`): https://github.com/paritytech/parity
 * Porosity (`porosity`): https://github.com/comaeio/porosity
 * DappHub (`dapp`, `seth`, `hevm`, `evmdis`): https://dapp.tools/
-* Explorer: https://github.com/carsenk/explorer
+* Solium (`solium`): https://github.com/duaraghav8/Solium
+* Embark (`embark`): https://github.com/iurimatias/embark-framework
 * Truffle Framework (`truffle`, `ganache-cli`, `testrpc`): http://truffleframework.com/
+* Explorer: https://github.com/carsenk/explorer
 * Radare2 + EVM decompiler (`r2`): https://blog.positive.com/reversing-evm-bytecode-with-radare2-ab77247e5e53
 
 ### Ethereum GUI Tools
