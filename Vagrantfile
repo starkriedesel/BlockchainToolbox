@@ -6,9 +6,6 @@ Vagrant.configure("2") do |config|
   config.vm.define "cli", primary: true do |cli|
     cli.vm.box = "bento/ubuntu-16.04"
     cli.vm.hostname = "toolbox"
-
-    # Forwarded ports
-    cli.vm.network "forwarded_port", guest: 3001, host: 3001 # hlfabric marbles
   end
 
   # Core CLI tools
