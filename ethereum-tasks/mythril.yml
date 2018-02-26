@@ -1,0 +1,17 @@
+- name: Pull mythril github repo
+  git:
+    repo: https://github.com/ConsenSys/mythril
+    update: false
+    dest: "{{ansible_env.HOME}}/ethereum/mythril"
+- name: Install laser-ethereum via pip3
+  pip:
+    name: laser-ethereum
+    executable: pip3
+- name: Install requests >= 2.16.0
+  pip:
+    name: requests>=2.16.0
+    executable: pip3
+- name: Install mythril via setup.py
+  shell: "sudo python3 setup.py install"
+  args:
+    chdir: "{{ansible_env.HOME}}/ethereum/mythril"

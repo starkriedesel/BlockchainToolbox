@@ -18,5 +18,7 @@
       import_tasks: ethereum-tasks/dapphub.yml
     - name: Install ethereum block explorer
       import_tasks: ethereum-tasks/explorer.yml
+    - name: Install mythril
+      import_tasks: ethereum-tasks/mythril.yml
     - name: Install parity
       import_tasks: ethereum-tasks/parity.yml

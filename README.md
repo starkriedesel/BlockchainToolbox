@@ -21,6 +21,7 @@ Vagrant box for building, experimenting, and hacking on blockchains. Both comman
 * Parity (`parity`): https://github.com/paritytech/parity
 * Porosity (`porosity`): https://github.com/comaeio/porosity
 * DappHub (`dapp`, `seth`, `hevm`, `evmdis`): https://dapp.tools/
+* Mythril (`myth`): https://github.com/ConsenSys/mythril
 * Solium (`solium`): https://github.com/duaraghav8/Solium
 * Embark (`embark`): https://github.com/iurimatias/embark-framework
 * Truffle Framework (`truffle`, `ganache-cli`, `testrpc`): http://truffleframework.com/
