@@ -15,4 +15,5 @@
   user:
     name: "{{ansible_user}}"
     shell: /usr/bin/zsh
+  become: true
 
