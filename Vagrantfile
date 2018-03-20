@@ -6,6 +6,10 @@ Vagrant.configure("2") do |config|
   config.vm.define "cli", primary: true do |cli|
     cli.vm.box = "bento/ubuntu-16.04"
     cli.vm.hostname = "toolbox"
+
+    cli.vm.provider "virtualbox" do |vb|
+      vb.memory = "4096"
+    end
   end
 
   # Core CLI tools
@@ -39,8 +43,8 @@ Vagrant.configure("2") do |config|
 
     gui.vm.provider "virtualbox" do |vb|
       vb.gui = true
-      vb.memory = "2048"
-      vb.customize ["modifyvm", :id, "--vram", "32"]
+      vb.memory = "4096"
+      vb.customize ["modifyvm", :id, "--vram", "64"]
     end
 
     # Core GUI tools
