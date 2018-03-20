@@ -10,6 +10,7 @@
     repo: https://github.com/ethereum/solidity
     dest: /home/vagrant/ethereum/solidity
     recursive: true
+    update: no
 - name: Make build directory
   file:
     path: /home/vagrant/ethereum/solidity/make

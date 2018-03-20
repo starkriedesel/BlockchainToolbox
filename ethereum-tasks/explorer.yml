@@ -2,6 +2,7 @@
   git:
     repo: https://github.com/carsenk/explorer
     dest: /home/vagrant/ethereum/explorer
+    update: no
 - name: Install explorer npm depedencies
   npm:
     path: /home/vagrant/ethereum/explorer

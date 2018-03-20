@@ -188,6 +188,8 @@ fi
 
 alias ls='ls --color=auto'
 
-export GOROOT=GOROOT=/usr/lib/go-1.9
+export GOROOT=/usr/lib/go-1.9
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+
+source ~/.profile
