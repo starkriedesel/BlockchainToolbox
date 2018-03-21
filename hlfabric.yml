@@ -41,3 +41,10 @@
       git:
         repo: https://github.com/IBM-Blockchain/marbles
         dest: "{{ansible_env.HOME}}/hlfabric/marbles"
+        update: false
+    - name: Pull hlfabric block explorer git repository
+      git:
+        repo: https://github.com/hyperledger/blockchain-explorer.git
+        dest: "{{ansible_env.HOME}}/hlfabric/explorer"
+        update: false
+
