@@ -59,7 +59,8 @@ The vagrant image is built using ansible playbooks which can be used on a physic
 4. `ethereum-cli.yml`
 5. `ethereum-gui.yml` *OPTIONAL*
 6. `bitcoin-cli.yml`
-7. `hlfabric.yml`
+7. `hlfabric-cli.yml`
+8. `quorum-cli.yml`
 
 See ansible documentation for more information about playbooks: http://docs.ansible.com/ansible/latest/playbooks.html
 
