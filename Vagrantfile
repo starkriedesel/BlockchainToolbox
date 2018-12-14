@@ -27,14 +27,19 @@ Vagrant.configure("2") do |config|
     ansible.playbook = 'ethereum-cli.yml'
   end
 
+  # Quorum (CLI)
+  config.vm.provision "quorum-cli", type: "ansible_local" do |ansible|
+    ansible.playbook = 'quorum-cli.yml'
+  end
+
   # Bitcoin CLI tools
   config.vm.provision "bitcoin-cli", type: "ansible_local" do |ansible|
     ansible.playbook = 'bitcoin-cli.yml'
   end
 
   # Hyperledger Fabric (CLI)
-  config.vm.provision "hlfabric", type: "ansible_local" do |ansible|
-    ansible.playbook = 'hlfabric.yml'
+  config.vm.provision "hlfabric-cli", type: "ansible_local" do |ansible|
+    ansible.playbook = 'hlfabric-cli.yml'
   end
 
   config.vm.define "gui", primary: false, autostart: false do |gui|

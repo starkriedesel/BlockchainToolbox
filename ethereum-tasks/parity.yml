@@ -4,5 +4,5 @@
     dest: /tmp/install_parity.sh
     mode: 0755
 - name: Install parity from installer script
-  command: /tmp/install_parity.sh
+  command: bash -c " (./install_parity.sh | tee /tmp/parity_install.log) || grep "already installed" /tmp/parity_install.log"
   become: true

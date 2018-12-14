@@ -1,0 +1,12 @@
+- name: Get and build ipfs-update
+  command: go get -u github.com/ipfs/ipfs-update
+  args:
+    creates: "{{ansible_env.HOME}}/go/bin/ipfs-update"
+  environment:
+    GOPATH: "{{ansible_env.HOME}}/go"
+- name: Install latest ipfs build
+  command: "{{ansible_env.HOME}}/go/bin/ipfs-update install latest"
+  args:
+    creates: "{{ansible_env.HOME}}/go/bin/ipfs"
+  environment:
+    GOPATH: "{{ansible_env.HOME}}/go"

@@ -192,4 +192,6 @@ export GOROOT=/usr/lib/go-1.9
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
+export PATH=$PATH:$HOME/.npm-packages/bin
+
 source ~/.profile

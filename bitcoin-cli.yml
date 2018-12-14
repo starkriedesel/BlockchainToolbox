@@ -13,17 +13,18 @@
         repo: 'ppa:bitcoin/bitcoin'
       become: true
     - name: Install bitcoin core requirements
-      apt: name={{item}}
-      with_items:
-        - autoconf
-        - libdb4.8-dev
-        - libdb4.8++-dev
-        - libevent-dev
+      apt:
+        pkg:
+          - autoconf
+          - libdb4.8-dev
+          - libdb4.8++-dev
+          - libevent-dev
       become: true
     - name: Pull bitcoin core github repo
       git:
         repo: https://github.com/bitcoin/bitcoin.git
         dest: "{{ansible_env.HOME}}/bitcoin/core"
+        update: false
     - name: Autoconf bitcoin core
       command: "{{ansible_env.HOME}}/bitcoin/core/autogen.sh"
       args:

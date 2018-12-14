@@ -5,7 +5,9 @@
       apt: name=build-essential
       become: true
     - name: Make ethereum directory
-      file: path=/home/vagrant/ethereum state=directory
+      file:
+        path: "{{ansible_env.HOME}}/ethereum"
+        state: directory
     - name: Install ethereum cli tools
       import_tasks: ethereum-tasks/cli-tools.yml
     - name: Install geth (go-ethereum) from source
@@ -18,7 +20,7 @@
       import_tasks: ethereum-tasks/dapphub.yml
     - name: Install ethereum block explorer
       import_tasks: ethereum-tasks/explorer.yml
-    - name: Install mythril
-      import_tasks: ethereum-tasks/mythril.yml
+    #- name: Install mythril
+    #  import_tasks: ethereum-tasks/mythril.yml
     - name: Install parity
       import_tasks: ethereum-tasks/parity.yml

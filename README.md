@@ -33,10 +33,15 @@ Vagrant box for building, experimenting, and hacking on blockchains. Both comman
 * Ganache GUI: https://github.com/trufflesuite/ganache
 * VS Code Solidity Plugin: https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity
 
-### HyperLedger Frabric
-* Fabric binaries: https://hyperledger-fabric.readthedocs.io/en/release/
+### HyperLedger Fabric
+* Fabric binaries (`cryptogen`,`configtxgen`,`configtxlator`,`peer`, `orderer`): https://hyperledger-fabric.readthedocs.io/en/release/
 * Fabric Samples: https://github.com/hyperledger/fabric-samples
 * IBM Marbles example: https://github.com/IBM-Blockchain/marbles
+* Explorer: https://github.com/hyperledger/blockchain-explorer
+
+### Quorum CLI Tools
+* Quorum binaries (`quorum-geth`, `quorum-bootnode`): https://github.com/jpmorganchase/quorum
+* Tessera: https://github.com/jpmorganchase/tessera
 
 ### Bitcoin CLI Tools
 * Bitcoin Core (`bitcoind`, `bitcoin-cli`, `bitcoin-tx`): https://github.com/bitcoin/bitcoin

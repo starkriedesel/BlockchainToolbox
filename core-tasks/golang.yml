@@ -6,21 +6,21 @@
   become: true
 - name: Create GOPATH & GOBIN
   file:
-    path: /home/vagrant/go/bin
+    path: "{{ansible_env.HOME}}/go/bin"
     state: directory
 - name: Set GOROOT
   lineinfile:
-    path: /home/vagrant/.bashrc
+    path: "{{ansible_env.HOME}}/.bashrc"
     regexp: '^export GOROOT='
     line: export GOROOT=/usr/lib/go-1.9
 - name: Set GOPATH
   lineinfile:
-    path: /home/vagrant/.bashrc
+    path: "{{ansible_env.HOME}}/.bashrc"
     regexp: '^export GOPATH='
     line: export GOPATH=/home/vagrant/go
 - name: Put GO binaries on PATH
   lineinfile:
-    path: /home/vagrant/.bashrc
+    path: "{{ansible_env.HOME}}/.bashrc"
     line: 'export PATH=$PATH:$GOPATH/bin'
 - name: Symlink go to /usr/local/bin
   file:
@@ -28,5 +28,6 @@
     dest: /usr/local/bin/go
     state: link
   become: true
-
+- name: Install gofmt
+  shell: GOPATH={{ansible_env.HOME}}/go go get github.com/golang/go/src/cmd/gofmt
 

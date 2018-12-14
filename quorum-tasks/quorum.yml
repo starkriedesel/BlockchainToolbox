@@ -1,0 +1,19 @@
+- name: Clone jpmorganchase/quorum
+  git:
+    repo: https://github.com/jpmorganchase/quorum
+    dest: "{{ansible_env.HOME}}/quorum/quorum"
+    update: no
+- name: Build quorum from source
+  make:
+    chdir: "{{ansible_env.HOME}}/quorum/quorum"
+    target: all
+- name: Copy binaries to /usr/local/bin
+  copy:
+    src: "{{ansible_env.HOME}}/quorum/quorum/build/bin/{{item}}"
+    dest: /usr/local/bin/quorum-{{item}}
+    remote_src: yes
+    mode: 0755
+  with_items:
+    - geth
+    - bootnode
+  become: true

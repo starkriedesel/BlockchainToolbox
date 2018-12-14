@@ -2,10 +2,13 @@
   npm:
     name: "{{item}}"
     global: yes
-  become: true
   with_items:
     - truffle
     - testrpc
     - ganache-cli
     - solium
     - embark
+- name: Install ethereum tools from pip
+  pip:
+    name: mythril
+    executable: pip3

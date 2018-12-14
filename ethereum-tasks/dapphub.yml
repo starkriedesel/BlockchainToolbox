@@ -1,20 +1,20 @@
-- name: Add dapphub nix channel
-  shell: bash -c "source /home/vagrant/.nix-profile/etc/profile.d/nix.sh && nix-channel --add https://nix.dapphub.com/pkgs/dapphub"
-- name: Update nix channels
-  shell: bash -c "source /home/vagrant/.nix-profile/etc/profile.d/nix.sh && nix-channel --add https://nix.dapphub.com/pkgs/dapphub && nix-channel --update"
-- name: Install dapp, seth, and hevm via nix
-  shell: bash -c "source /home/vagrant/.nix-profile/etc/profile.d/nix.sh && nix-channel --add https://nix.dapphub.com/pkgs/dapphub && nix-env -iA dapphub.{{item}}"
+- name: Clone dapptools repo
+  git:
+    repo: https://github.com/dapphub/dapptools
+    dest: "{{ansible_env.HOME}}/.dapp/dapptools"
+    recursive: true
+    update: no
+- name: Add dapp to cachix
+  shell: bash -c "source {{ansible_env.HOME}}/.nix-profile/etc/profile.d/nix.sh && cachix use dapp"
+- name: Install dapp, seth, ethsign, and hevm via nix
+  shell: bash -c "source {{ansible_env.HOME}}/.nix-profile/etc/profile.d/nix.sh && nix-env -f {{ansible_env.HOME}}/.dapp/dapptools -iA dapp seth hevm ethsign"
   args:
-    creates: /home/vagrant/.nix-profile/bin/{{item}}
-  with_items:
-    - dapp
-    - seth
-    - hevm
+    creates: "{{ansible_env.HOME}}/.nix-profile/bin/seth"
 - name: Clone evmdis git repo
   git:
     repo: https://github.com/Arachnid/evmdis
-    dest: /home/vagrant/go/src/github.com/Arachnid/evmdis
+    dest: "{{ansible_env.HOME}}/go/src/github.com/Arachnid/evmdis"
 - name: Build evmdis
   shell: bash -c "go install github.com/Arachnid/evmdis/evmdis"
   args:
-    creates: /home/vagrant/go/bin/evmdis
+    creates: "{{ansible_env.HOME}}/go/bin/evmdis"
