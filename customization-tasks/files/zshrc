@@ -188,8 +188,13 @@ fi
 
 alias ls='ls --color=auto'
 
-export GOROOT=/usr/lib/go-1.9
+export GOROOT=/usr/lib/go-1.10
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+
+export M2_HOME=$HOME/tools/maven
+export PATH=$PATH:$M2_HOME/bin
+
+export PATH=$PATH:$HOME/.npm-packages/bin
 
 source ~/.profile

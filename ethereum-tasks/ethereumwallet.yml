@@ -4,11 +4,11 @@
   register: ethereumwallet_installed
 - name: Download Ethereum Wallet deb file
   get_url:
-    url: https://github.com/ethereum/mist/releases/download/v0.9.3/Ethereum-Wallet-linux64-0-9-3.deb
+    url: https://github.com/ethereum/mist/releases/download/v0.11.1/Ethereum-Wallet-linux64-0-11-1.deb
     dest: /tmp/Ethereum-Wallet-linux64.deb
-  when: ethereumwallet_installed|failed
+  when: ethereumwallet_installed is failed
 - name: Install Ethereum Wallet from deb
   apt:
     deb: /tmp/Ethereum-Wallet-linux64.deb
   become: true
-  when: ethereumwallet_installed|failed
+  when: ethereumwallet_installed is failed

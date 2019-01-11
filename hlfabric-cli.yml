@@ -15,6 +15,7 @@
       git:
         repo: https://github.com/hyperledger/fabric-samples.git
         dest: "{{ansible_env.HOME}}/hlfabric/fabric-samples"
+        update: false
     - name: Download HL:Fabric install script
       get_url:
         url: https://goo.gl/byy2Qj
@@ -36,6 +37,7 @@
         - configtxgen
         - configtxlator
         - peer
+        - orderer
       become: true
     - name: Pull IBM Marbles demo repository
       git:

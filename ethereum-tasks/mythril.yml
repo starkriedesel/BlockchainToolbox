@@ -18,7 +18,14 @@
     name: requests>=2.16.0
     executable: pip3
   become: true
+- name: Install requirements
+  pip:
+    requirements: requirements.txt
+    chdir: "{{ansible_env.HOME}}/ethereum/mythril"
+    executable: pip3
+  become: true
 - name: Install mythril via setup.py
-  shell: "sudo python3 setup.py install"
+  shell: "python3 setup.py install"
   args:
     chdir: "{{ansible_env.HOME}}/ethereum/mythril"
+  become: true

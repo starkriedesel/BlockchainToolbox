@@ -1,13 +1,13 @@
 - name: Clone carsenk/explorer
   git:
     repo: https://github.com/carsenk/explorer
-    dest: /home/vagrant/ethereum/explorer
+    dest: "{{ansible_env.HOME}}/ethereum/explorer"
     update: no
 - name: Install explorer npm depedencies
   npm:
-    path: /home/vagrant/ethereum/explorer
+    path: "{{ansible_env.HOME}}/ethereum/explorer"
     production: no
 - name: Install explorer bower depedencies
   bower:
-    path: /home/vagrant/ethereum/explorer
+    path: "{{ansible_env.HOME}}/ethereum/explorer"
     relative_execpath: node_modules/.bin

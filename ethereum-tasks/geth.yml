@@ -1,18 +1,18 @@
 - name: Clone go-ethereum git repo
   git:
     repo: https://github.com/ethereum/go-ethereum
-    dest: /home/vagrant/go/src/github.com/ethereum/go-ethereum
+    dest: "{{ansible_env.HOME}}/go/src/github.com/ethereum/go-ethereum"
 - name: Make go-ethereum
   make:
-    chdir: /home/vagrant/go/src/github.com/ethereum/go-ethereum
+    chdir: "{{ansible_env.HOME}}/go/src/github.com/ethereum/go-ethereum"
     target: "{{ item }}"
   with_items:
     - geth
     - swarm
 - name: Copy binaries to GOBIN
   copy:
-    src: /home/vagrant/go/src/github.com/ethereum/go-ethereum/build/bin/{{ item }}
-    dest: /home/vagrant/go/bin/{{ item }}
+    src: "{{ansible_env.HOME}}/go/src/github.com/ethereum/go-ethereum/build/bin/{{ item }}"
+    dest: "{{ansible_env.HOME}}/go/bin/{{ item }}"
     remote_src: yes
     mode: 0755
   with_items:

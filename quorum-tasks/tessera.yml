@@ -1,0 +1,10 @@
+- name: Clone jpmorganchase/tessera
+  git:
+    repo: https://github.com/jpmorganchase/tessera
+    dest: "{{ansible_env.HOME}}/quorum/tessera"
+    update: no
+- name: Build tessera from source
+  shell: "{{ansible_env.HOME}}/tools/maven/bin/mvn install"
+  args:
+    chdir: "{{ansible_env.HOME}}/quorum/tessera"
+    creates: "{{ansible_env.HOME}}/quorum/tessera/tessera-app/target/"

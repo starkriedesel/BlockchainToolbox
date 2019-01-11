@@ -1,0 +1,8 @@
+- hosts: all
+  tasks:
+    - name: Make quorum directory
+      file: path={{ansible_env.HOME}}/quorum state=directory
+    - name: Install quorum
+      import_tasks: quorum-tasks/quorum.yml
+    - name: Install tessera
+      import_tasks: quorum-tasks/tessera.yml

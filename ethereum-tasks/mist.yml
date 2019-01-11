@@ -4,11 +4,11 @@
   register: mist_installed
 - name: Download Mist deb file
   get_url:
-    url: https://github.com/ethereum/mist/releases/download/v0.9.3/Mist-linux64-0-9-3.deb
+    url: https://github.com/ethereum/mist/releases/download/v0.11.1/Mist-linux64-0-11-1.deb
     dest: /tmp/Mist-linux64.deb
-  when: mist_installed|failed
+  when: mist_installed is failed
 - name: Install Mist from deb
   apt:
     deb: /tmp/Mist-linux64.deb
   become: true
-  when: mist_installed|failed
+  when: mist_installed is failed

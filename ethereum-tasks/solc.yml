@@ -1,31 +1,31 @@
 - name: Install solidity requirements
-  apt: name={{item}}
-  with_items:
-    - cmake
-    - libz3-dev
-    - libboost-all-dev
+  apt:
+    pkg:
+      - cmake
+      - libz3-dev
+      - libboost-all-dev
   become: true
 - name: Pull solidty git repo
   git:
     repo: https://github.com/ethereum/solidity
-    dest: /home/vagrant/ethereum/solidity
+    dest: "{{ansible_env.HOME}}/ethereum/solidity"
     recursive: true
     update: no
 - name: Make build directory
   file:
-    path: /home/vagrant/ethereum/solidity/make
+    path: "{{ansible_env.HOME}}/ethereum/solidity/make"
     state: directory
 - name: Prepare solidity for build
   shell: cmake ..
   args:
-    chdir: /home/vagrant/ethereum/solidity/make
-    creates: /home/vagrant/ethereum/solidity/make/Makefile
+    chdir: "{{ansible_env.HOME}}/ethereum/solidity/make"
+    creates: "{{ansible_env.HOME}}/ethereum/solidity/make/Makefile"
 - name: Build solidity
   make:
-    chdir: /home/vagrant/ethereum/solidity/make
+    chdir: "{{ansible_env.HOME}}/ethereum/solidity/make"
 - name: Install solc binary
   copy:
-    src: /home/vagrant/ethereum/solidity/make/solc/solc
+    src: "{{ansible_env.HOME}}/ethereum/solidity/make/solc/solc"
     dest: /usr/local/bin/solc
     remote_src: true
     mode: 0755

@@ -9,7 +9,11 @@
 - name: Install NodeJS
   apt: name=nodejs update_cache=true
   become: true
-#- name: Install NPM
-#  apt: name=npm
-#  become: true
-
+- name: Create npm-packages dir
+  file:
+    path: "{{ansible_env.HOME}}/.npm-packages"
+    state: directory
+- name: Create npmrc file
+  copy:
+    src: files/npmrc
+    dest: "{{ansible_env.HOME}}/.npmrc"

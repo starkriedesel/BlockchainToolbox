@@ -7,16 +7,16 @@
   file:
     path: /nix
     state: directory
-    owner: vagrant
+    owner: "{{ansible_env.USER}}"
   become: yes
   when: 'nix_env_binary.stat.exists == false'
 - name: Install nix dependencies
-  apt: name={{item}}
-  with_items:
-    - curl
-    - bzip2
-    - ca-certificates
-    - libdigest-sha-perl
+  apt:
+    pkg:
+      - curl
+      - bzip2
+      - ca-certificates
+      - libdigest-sha-perl
   become: yes
   when: 'nix_env_binary.stat.exists == false'
 - name: Download nix installer
@@ -30,7 +30,9 @@
   args:
     creates: /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
   environment:
-    USER: vagrant
+    USER: "{{ansible_env.USER}}"
     ALLOW_PREEXISTING_INSTALLATION: "x"
   when: 'nix_env_binary.stat.exists == false'
+- name: Install cachix
+  shell: "bash -c 'source {{ansible_env.HOME}}/.nix-profile/etc/profile.d/nix.sh && nix-env -if https://github.com/cachix/cachix/tarball/master --substituters https://cachix.cachix.org --trusted-public-keys cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM='"
 

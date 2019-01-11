@@ -1,36 +1,38 @@
 - name: Install libboost
-  apt: name=libboost-all-dev
+  apt: 
+    pkg:
+      - libboost-all-dev
   become: true
 - name: Check for porosity directory
   stat:
-    path: /home/vagrant/ethereum/porosity/porosity
+    path: "{{ansible_env.HOME}}/ethereum/porosity/porosity"
   register: porosity_dir_check
 - name: Get porosity source code
   git:
     repo: https://github.com/comaeio/porosity
-    dest: /home/vagrant/ethereum/porosity
+    dest: "{{ansible_env.HOME}}/ethereum/porosity"
   when: porosity_dir_check.stat.exists == False
 - name: Add boost_multiprecision_number_compare_bug_workaround.hpp
   get_url:
     url: https://raw.githubusercontent.com/chriseth/solidity/0a2a2cf38b7794826a17efe44aea5dc96de98dc7/libdevcore/boost_multiprecision_number_compare_bug_workaround.hpp
-    dest: /home/vagrant/ethereum/porosity/porosity/porosity/boost_multiprecision_number_compare_bug_workaround.hpp
+    dest: "{{ansible_env.HOME}}/ethereum/porosity/porosity/porosity/boost_multiprecision_number_compare_bug_workaround.hpp"
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_major_version|int < 17 and porosity_dir_check.stat.exists == False
 - name: Overwrite Porosity.h with workaround change
   copy:
     src: files/Porosity.h
-    dest: /home/vagrant/ethereum/porosity/porosity/porosity/Porosity.h
+    dest: "{{ansible_env.HOME}}/ethereum/porosity/porosity/porosity/Porosity.h"
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_major_version|int < 17 and porosity_dir_check.stat.exists == False
 - name: Check porosity build file
   stat:
-    path: /home/vagrant/ethereum/porosity/porosity/porosity/porosity
+    path: "{{ansible_env.HOME}}/ethereum/porosity/porosity/porosity/porosity"
   register: porosity_bin_check
 - name: Build porosity
   make:
-    chdir: /home/vagrant/ethereum/porosity/porosity/porosity
+    chdir: "{{ansible_env.HOME}}/ethereum/porosity/porosity/porosity"
   when: porosity_bin_check.stat.exists == False
 - name: Install porosity
   copy:
-    src: /home/vagrant/ethereum/porosity/porosity/porosity/porosity
+    src: "{{ansible_env.HOME}}/ethereum/porosity/porosity/porosity/porosity"
     dest: /usr/local/bin/porosity
     remote_src: yes
     mode: 0755

@@ -1,0 +1,11 @@
+- name: Unarchive maven
+  unarchive:
+    src: http://www.apache.org/dist/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.tar.gz
+    dest: /opt
+    remote_src: yes
+  become: true
+- name: Symlink maven dir
+  file:
+    src: /opt/apache-maven-3.6.0
+    dest: "{{ansible_env.HOME}}/tools/maven"
+    state: link

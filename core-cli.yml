@@ -5,13 +5,21 @@
       apt: name=build-essential
       become: true
     - name: Install Python 2/3
-      apt: name={{item}}
-      with_items:
-        - python
-        - python-pip
-        - python3
-        - python3-pip
+      apt:
+        pkg:
+          - python
+          - python-pip
+          - python3
+          - python3-pip
+          - pandoc
       become: true
+    - name: Install Java
+      apt:
+        pkg:
+          - default-jdk
+      become: true
+    - name: Install Maven
+      import_tasks: core-tasks/maven.yml
     - name: Install Docker
       import_tasks: core-tasks/docker.yml
     - name: Install GoLang

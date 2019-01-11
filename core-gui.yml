@@ -3,12 +3,12 @@
     roles:
       - role: gantsign.visual-studio-code
         users:
-          - username: vagrant
+          - username: "{{ansible_env.USER}}"
             visual_studio_code_extensions:
               - ms-vscode.cpptools
               - vscoss.vscode-ansible
               - ms-python.python
-              - lukehoban.go
+              - ms-vscode.Go
               - rebornix.ruby
               - JuanBlanco.solidity
               - PeterJausovec.vscode-docker

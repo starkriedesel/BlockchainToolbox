@@ -1,32 +1,33 @@
 - name: Install GoLang PPA
   apt_repository: repo='ppa:gophers/archive'
   become: true
-- name: Install Go 1.9
-  apt: name=golang-1.9-go update_cache=true
+- name: Install Go 1.10
+  apt: name=golang-1.10-go update_cache=true
   become: true
 - name: Create GOPATH & GOBIN
   file:
-    path: /home/vagrant/go/bin
+    path: "{{ansible_env.HOME}}/go/bin"
     state: directory
 - name: Set GOROOT
   lineinfile:
-    path: /home/vagrant/.bashrc
+    path: "{{ansible_env.HOME}}/.bashrc"
     regexp: '^export GOROOT='
-    line: export GOROOT=/usr/lib/go-1.9
+    line: export GOROOT=/usr/lib/go-1.10
 - name: Set GOPATH
   lineinfile:
-    path: /home/vagrant/.bashrc
+    path: "{{ansible_env.HOME}}/.bashrc"
     regexp: '^export GOPATH='
     line: export GOPATH=/home/vagrant/go
 - name: Put GO binaries on PATH
   lineinfile:
-    path: /home/vagrant/.bashrc
+    path: "{{ansible_env.HOME}}/.bashrc"
     line: 'export PATH=$PATH:$GOPATH/bin'
 - name: Symlink go to /usr/local/bin
   file:
-    src: /usr/lib/go-1.9/bin/go
+    src: /usr/lib/go-1.10/bin/go
     dest: /usr/local/bin/go
     state: link
   become: true
-
+- name: Install gofmt
+  shell: GOPATH={{ansible_env.HOME}}/go go get github.com/golang/go/src/cmd/gofmt
 
