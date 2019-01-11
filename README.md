@@ -1,7 +1,12 @@
 # BlockchainToolbox
 Vagrant box for building, experimenting, and hacking on blockchains. Both command line and graphical (xubuntu) versions are available. Both versions are based on Ubuntu 16.04 (xenial). All tools are bleeding edge (compiled from source in most cases) for maximum hackability!
 
-# Building:
+# Install with Vagrant (fast):
+1. Install vagrant (https://www.vagrantup.com/downloads.html) and VirtualBox (https://www.virtualbox.org/wiki/Downloads)
+2. `vagrant init starkriedesel/BlockchainToolbox`
+3. `vagrant up`
+
+# Building (slow):
 1. Install vagrant (https://www.vagrantup.com/downloads.html) and VirtualBox (https://www.virtualbox.org/wiki/Downloads)
 2. Pull submodules: `git submodule update --init --recursive`
 3. `vagrant up cli` - first time takes about 15 minutes depending on hardware
@@ -54,7 +59,8 @@ The vagrant image is built using ansible playbooks which can be used on a physic
 4. `ethereum-cli.yml`
 5. `ethereum-gui.yml` *OPTIONAL*
 6. `bitcoin-cli.yml`
-7. `hlfabric.yml`
+7. `hlfabric-cli.yml`
+8. `quorum-cli.yml`
 
 See ansible documentation for more information about playbooks: http://docs.ansible.com/ansible/latest/playbooks.html
 
